@@ -1,0 +1,12 @@
+name: core
+title: Player Core
+version: latest
+display_version: default
+asciidoc:
+    attributes:
+        source-language: asciidoc@
+        xrefstyle: short@
+nav:
+    - modules/intro/nav.adoc
+    - modules/gameplay/nav.adoc
+    - modules/char/nav.adoc

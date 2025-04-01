@@ -1,0 +1,4 @@
+* Gaming
+** xref:actions.adoc[]
+*** xref:basicActions.adoc[]
+**** xref:attack.adoc[]

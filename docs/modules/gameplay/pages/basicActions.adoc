@@ -1,0 +1,14 @@
+= Acciones básicas
+
+Representan obras comunes que cualquier criatura es capaz de realizar.
+
+.Acciones básicas
+* Apoyar ⤾
+* Arrastrarse ◆
+* Atacar ◆
+* Buscar ◆
+* Indagar intenciones ◆
+* Interactuar ◆
+* Liberarse ◆
+* Paso con cautela ◆
+* Posponer ◇

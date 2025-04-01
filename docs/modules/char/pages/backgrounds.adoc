@@ -1,0 +1,3 @@
+= Bagaje: Background
+
+El bagaje representa las experiencias que ha vivído el personaje previamente, este le proporciona una característica y entrenamiento en una o más habilidades.

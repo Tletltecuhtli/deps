@@ -1,0 +1,15 @@
+= Introducción
+*¡Aventureros, atención! Vamos a jugar Pathfinder*
+Imaginen que son parte de una película de fantasía medieval como _El Senor de los Anillos_ o _Calabozos y Dragones_ pero aquí *USTEDES* son los *Héroes*.
+
+== ¿Qué es Pathfinder?
+Es un *Juego de mesa de rol* donde se crean personajes únicos y viven aventuras épicas. Pero no es un juego de mesa normal, aquí el único límite es tu imaginación mientras que los dados (principalmente un d20) determinan lo que pasa.
+
+== ¿Cómo se juega?
+Vamos a adentrarnos más a detalle en el próximo capítulo pero a groso modo:
+
+=== Creas un personaje
+¿Quieres ser un bárbaro furioso?, ¿un hechizero que lanza bolas de fuego? o ¿un astuto ladrón?. ¡Todo es posible! Pathfinder tiene una amplia gama de razas y clases para creación de personajes por lo que puedes ser lo que te imagines. Y lo que es mejor, si nada se parece a lo que tú quieres no hay problema *podemos crearlo*. Solo tienes que indicarle a tu _contramaestre_, es decir tu servidor, precisamente que es lo que deseas y lo haremos posible.
+
+=== ¿Qué es un contramaestre? (Game Master)
+Para poder jugar todo juego de rol se necesita un voluntario que Es quien se encargaga de contar la historia y mantener control de los personajes extra del mundo tanto monstruos como pueblerinos y nobeza todo lo controla el contramaestre. Hay reglas especificas que debe respetar pero de momento no vamos a preocuparnos por nada de eso porque aquí solo vamos a centrarnos del lado opuesto que son personajes jugables

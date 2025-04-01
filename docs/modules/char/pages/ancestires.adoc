@@ -1,0 +1,3 @@
+= Ascendencia: Ancestry _porque decir *raza* es racista_
+
+La ascendencia es el tipo de gente al que pertenece el personaje o la criatura. La ascendencia determina los valores iniciales de **golpes de vida**[HP], idiomas, sentidos y velocidad; además brinda ciertas características[feats] asociadas exclusivamente a su ascendencia.

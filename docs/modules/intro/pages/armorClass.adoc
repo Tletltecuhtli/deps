@@ -1,0 +1,3 @@
+= Nivel de armadura: Armor Class (AC)
+
+Toda criatura en el juego tiene un valor de nivel de armadura. Éste valor determina que tan difícil es atacar a la criatura. Básicamente es el DC de la criatura en contra del ataque.

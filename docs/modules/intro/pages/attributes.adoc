@@ -1,0 +1,12 @@
+= Atributos: Attribute
+
+Toda criatura tiene seis atributos que lo caracterizan, estos son:
+* *F* uerza _Strength_
+* *D* estreza _Dexterity_
+* *R* esistencia _Constitution_
+* *I* nteligencia _Intelligence_
+* *S* abiduría _Wisdom_
+* *C* arísma _Charisma_
+
+[note]
+En la versión _remasterizada_ de Pathfinder se desecharón los valores del 1 al 20 en los atributos, dejando únicamente los modificadores; siendo *0* el valor por defecto y de ahí partiendo a +1, +2, -1, etc.

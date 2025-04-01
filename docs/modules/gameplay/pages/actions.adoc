@@ -1,0 +1,28 @@
+= Acciones
+
+== Acción
+Dinámica que puede llevar a cabo cualquier personaje durante su turno en un encuentro; o fuera de estos, en cualquier momento a criterio del #contramaestre#. En los encuentros, al inicio de su turno cada criatura obtiene *TRES* acciones más *UNA* reacción, no acumulables. Hay cuatro tipos de acciones:
+
+Acción sencilla:: Se completa en un tiempo muy corto. Son auto-contenidas, y sus efectos se manifiestan en el lapso de una sola acción.
+Actividad:: Normalmente toman más tiempo y requieren de múltiples acciones, las cuales se consumen sucesivamente y durante el mismo turno.
+Reacción:: Tiene <<Desencadenante, desencadenantes>>, los cuales deben cumplirse en orden de poder usar la reacción, ya sea tu turno o no. Fuera de encuentros, el uso de reacciones es más flexible y bajo el criterio del #contramaestre#.
+Acción libre:: Sin costo alguno que pueden tener, o no, <<Desencadenante, desencadenantes>>, en caso de no tener desencadenante la acción libre debe hacerse en tu turno y no puede ser empleada simultáneamente junto otra acción.
+
+[NOTE]
+.Simbología
+====
+◆   Acción sencilla +
+◆◆  Actividad de doble acción +
+◆◆◆ Actividad de triple acción +
+⤾   Reacción +
+◇   Acción libre
+====
+
+== Actividad
+Fuera de encuentros, las actividades pueden tomar minutos, horas o hasta incluso días. Éste tipo de actividades vienen indicadas con el #rasgo# pertinente para indicar que se les planea usar en esos modos. Por lo general puedes hacer otras cosas mientras mientras se lleva a cabo la actividad, siempre y cuando tenga sentido. Por ejemplo, si estas Reparando un accesorio puedes tomarte un descanso e ir a platicar a una taberna, pero no podrías Descifrar un códice al mismo tiempo.
+
+== Desencadenante
+Se pueden usar acciones con desencadenantes solo en respuesta a ciertos eventos los cuales vienen detallados en la descripción de estas. Cuando el desencadenante se cumple, y solo hasta que este se cumple, puedes elegir, o no, llevar a cabo la respuesta.
+
+=== Limitaciones
+Los desencadenantes listados en la descripción de una acción limitan cuándo puedes usar estos. Pero solo puedes usar *UNA* acción en respuesta a un determinado desencadenante. Por ejemplo, si tuvieras dos reacciones que como desencadenante menciona al inicio de tu turno puedes usar cualquiera de ellas, pero no ambas. Esta limitación esta basada en una por criatura no por desencadenante, es decir, múltiples criaturas pueden reaccionar a un mismo desencadenante.

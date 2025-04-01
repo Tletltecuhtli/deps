@@ -1,0 +1,3 @@
+= Clase: Class
+
+La clase representa la especialidad del aventurero. Esta determina la mayoría de las

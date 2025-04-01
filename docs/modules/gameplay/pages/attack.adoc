@@ -1,0 +1,3 @@
+= Ataque: Attack
+
+Cuando una criatura trata de dañar a otra, ya sea con un golpe o cualquier otro tipo de acción.

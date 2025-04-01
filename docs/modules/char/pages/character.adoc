@@ -1,0 +1,6 @@
+= Personaje: Character
+
+== Héroe: Player Character (PC)
+Éste es un personaje creado y controlado por el jugador.
+
+== Personaje no jugable: Nonplayer CHaracter (NPC)
