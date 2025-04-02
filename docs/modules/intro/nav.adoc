@@ -1,6 +1,0 @@
-* xref:introduction.adoc[]
-
-[]
-* RPG
-** xref:attributes.adoc[]
-** xref:armorClass.adoc[]

@@ -1,4 +1,0 @@
-* xref:character.adoc[]
-** xref:ancestries.adoc[]
-** xref:classes.adoc []
-** xref:backgrounds.adoc[]
