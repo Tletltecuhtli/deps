@@ -1,0 +1,5 @@
+#!/bin/sh
+git add .
+git commit -a -m "$(tiempo -s)-$(cat /etc/hostname)"
+git push
+cd

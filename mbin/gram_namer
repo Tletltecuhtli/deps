@@ -1,0 +1,23 @@
+#!/bin/zsh
+
+filename=$(basename -- "$1")
+dirname=${PWD##*/}
+
+#salvar la extension en una variable
+fext="${filename##*.}"
+
+# encontrar la fecha de última modificación en formato yy mm dd
+y=$(date -r $1 +%y)
+m=$(date -r $1 +%m)
+d=$(date -r $1 +%d)
+M=(A B C D E F G H I J K L)
+
+#generar un string random
+rnd3=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 3 | head -n 1)
+
+#formato de salida
+#fecha.sh@usuario®ranomstring.ext
+#por ejemplo
+# 221IG@leex.fer21®s1f.jpg
+
+mv "$(pwd)/${filename}" "$(pwd)/2${y}${M[$m]}${$(([##36]d))}@${dirname}®${rnd3}.${fext}"

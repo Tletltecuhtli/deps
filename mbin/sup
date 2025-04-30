@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sleep 7 &&
+play "/usr/share/sounds/Windows XP Default/stereo/desktop-login.wav"

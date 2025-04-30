@@ -1,0 +1,14 @@
+#!/bin/awk -f
+
+BEGIN {
+    #aquí se determina cual va a ser el separador. En este caso las comillas
+    FS="\""
+}
+{
+    # si la linea NO tiene string=.sig< &&Y&& sí tiene string=x86
+    if (!/.sig</ && /x86/)
+        #se imprime la segunda columna (lo que está después de las primeras comillas y antes de las segundas, debido al separador previamente definido)
+        print $2
+}
+END {
+}

@@ -1,0 +1,78 @@
+#!/sbin/zsh
+
+### DEPENDENCIAS
+. $HOME/.config/zsh/functions.zsh
+deps=(
+    #bin,path,source
+    realesrgan-ncnn-vulkan,/mbin/src/ncnn,https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan
+    waifu2x-ncnn-vulkan,/mbin/src/ncnn,https://github.com/nihui/waifu2x-ncnn-vulkan
+    libavif.so,/usr/lib,https://github.com/AOMediaCodec/libavif
+    composite,/sbin,https://github.com/ImageMagick/ImageMagick
+    identify,/sbin,https://github.com/ImageMagick/ImageMagick
+    convert,/sbin,https://github.com/ImageMagick/ImageMagick
+    )
+# xbps-install ImageMagick libavif
+deps $deps
+
+### VARIABLES
+rsg="/mbin/src/ncnn/realesrgan-ncnn-vulkan"
+wfu="/mbin/src/ncnn/waifu2x-ncnn-vulkan"
+mkdir -p /tmp/wrk
+wrk="/tmp/wrk"
+
+### ARGUMENTOS
+if [[ -z $1 ]]; then
+    ayuda $0
+    exit
+fi
+while getopts ":hi:n:f:" arg; do
+    case $arg in
+        h)
+            ayuda $0
+            exit;;
+        i)
+            input="$OPTARG"
+            ;;
+        n)
+            nombre="$OPTARG"
+            ;;
+        f)
+            formato="$OPTARG"
+            ;;
+        ?)
+            echo "ERROR: Opción invalida"
+            exit 2;;
+    esac
+done
+
+### VERIFICAR
+if [[ -z $input ]]; then
+    echo "ERROR: Sin archivo de entrada especificado."
+    exit 2
+fi
+
+### DEFAULTS
+declare -A default
+default[nombre]="${input%.*}"
+default[formato]="avif"
+if [[ $(identify -format '%[fx:(h>w)]' $input) -eq 1 ]]; then
+    default[tamaño]="800x1280"
+else
+    default[tamaño]="1280x800"
+fi
+# Cambiar por valores de usuario
+for key value in ${(kv)default}; do
+    k=\$$key
+    if [[ ! -z ${(e)k} ]]; then
+        default[$key]=${(e)k}
+    fi
+done
+
+### MAIN
+$rsg -i $input -n realesrgan-x4plus -o /tmp/wrk/or.png
+$wfu -i $input -n 2 -s 4 -o /tmp/wrk/ow.png
+composite -blend 50 -gravity center /tmp/wrk/or.png /tmp/wrk/ow.png /tmp/wrk/out.png
+convert -strip -interlace Plane -gaussian-blur 0.05 -quality 85% -resize $default[tamaño] /tmp/wrk/out.png $default[nombre].$default[formato]
+
+### LIMPIEZA
+rm -rf /tmp/wrk

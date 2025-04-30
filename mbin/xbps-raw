@@ -1,0 +1,7 @@
+#!/bin/bash
+source /etc/xbps.d/00-repository-main.conf
+pth=$HOME/.cache/xbps/repo
+mkdir -p $pth
+xbps-fetch $repository -o $pth/xbps-repo_$(tiempo -f)
+filtro_xbps-fetch $pth/xbps-repo_$(fiempo -f) > $pth/current
+awk '!/.sig/' $pth/current > $HOME/xbps-raw

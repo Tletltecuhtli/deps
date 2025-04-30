@@ -1,0 +1,92 @@
+#!/bin/zsh
+
+# FUNCIONES INTERNAS
+fucntion interpolate() {
+    (( a = $1 + 1 ))
+    (( b = $1 + 2 ))
+    (( c = $1 + 3 ))
+    composite -blend 66 -gravity center $1 $c `printf "%04d" $a`.png
+    composite -blend 33 -gravity center $1 $c `printf "%04d" $b`.png
+}
+
+# REQUISITOS
+# falta hacer `req` y de momento necesitamos mpv , ffmpeg , flatpak , HandBrakeCLI(flatpak) , ImageMagick
+
+# MANIPULADOR DE ENTRADAS
+if [[ -z $1 || "$1" == "-h" ]]; then
+    #ayuda $0
+    mdcat /mdoc/$0.md # de momento en lo que genero `ayuda`
+    return 0
+elif [[ -z $2 ]]; then
+    echo 'ERROR: olvidaste decir cuál será el subtítulo a trabajar'
+    return 1
+fi
+
+# VERIFICAR ESPACIO SUFICIENTE PARA TRABAJAR
+reqSpace=5120000
+availSpace=$(df /tmp | awk 'NR==2 { print $4 }')
+if (( availSpace < reqSpace )); then
+    echo "ERROR: sin espacio en disco" >&2
+    exit 1
+fi
+
+# CONFIGURACIÓN INICIAL
+if [[ -n $3 ]]; then
+    NOMBRE=$3
+else
+    NOMBRE=${1%.*}
+fi
+mkdir -p /tmp/wrk/frames
+curr=$PWD
+
+# PROCESO
+#HandBrakeCLI pero desde flatpak para poder emplear el hardware, falta poner IF para si no encuentra nvidia, usar QVS en ELIF o si todo falla pues con CPU. LO IMPORTANTE es un framerate constante de 20fps.
+flatpak run --command=HandBrakeCLI fr.handbrake.ghb -i "$1" -o tmpOut.m4v -e nvenc_h265 -Y 550 -X 1280 -r 20 --cfr --auto-anamorphic --keep-display-aspect --subtitle $2 --subtitle-burned
+mv tmpOut.m4v /tmp/wrk/tmp.m4v # quirk porque flatpak no permite escribir en /tmp
+# ffmpeg Magick
+# Extraer el audio
+ffmpeg -i /tmp/wrk/tmp.m4v -vn -acodec copy /tmp/wrk/audio.aac
+# Segmentar el video de entrada a cachos de 1 minuto, ya que salen demasiadons PNGs y pesa mucho en videos largos
+ffmpeg -i /tmp/wrk/tmp.m4v -c copy -map 0 -segment_time 00:01:00 -f segment -reset_timestamps 1 /tmp/wrk/v%05d.mp4
+rm /tmp/wrk/tmp.m4v
+for vid in /tmp/wrk/*.mp4; do
+    ## Extraer todos los frames del vídeo
+    rm /tmp/wrk/frames/*
+    ffmpeg -ss 0 -i $vid -t $(mediainfo $vid --Inform="Video;%Duration%") /tmp/wrk/frames/%09d.png
+    #Seleccionar archivos png y darles nombre al frame correspondiente
+    cd /tmp/wrk/frames
+    frames=()
+    for file in *.png; do
+        echo "Creando nuevos frames $file ... "
+        printf "\033[A" # esto hace la magia de imprimir el feedback con el echo anterior. NO TENGO NI IDEA DE COMO FUNCIONA xD
+        ogframe=$(echo $file | sed 's/\.png//')
+        (( frame = 3 * $ogframe ))
+        frames+=("$frame")
+        mv $file $frame
+    done
+    ##Interpolación sencilla
+    N=90
+    for f in ${frames[@]}; do
+        ((i=i%N)); ((i++==0)) && wait
+        echo "Interpolando ... "
+        printf "\033[A"
+        (( nxt = $f + 3 ))
+        if [[ -e $nxt ]]; then
+            interpolate $f &
+        fi
+    done
+    wait
+    for f in ${frames[@]}; do
+        mv $f `printf "%04d" $f`.png
+    done
+    cd $curr
+    ffmpeg -framerate 60 -pattern_type glob -i '/tmp/wrk/frames/*.png' -c:v libsvtav1 -preset 6 ${vid%.*}.mkv
+    echo "file '${vid%.*}.mkv'" >> /tmp/wrk/list.txt
+    rm $vid
+done
+##Mezcla final
+ffmpeg -f concat -safe 0 -i /tmp/wrk/list.txt -c copy /tmp/wrk/video.mkv
+ffmpeg -i /tmp/wrk/video.mkv -i /tmp/wrk/audio.aac -c:v copy -c:a libopus -b:a 36k -ac 1 $NOMBRE.webm
+
+# LIMPIEZA
+rm -rf /tmp/wrk

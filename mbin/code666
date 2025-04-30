@@ -1,0 +1,50 @@
+#!/bin/zsh
+
+#array alfabetico para su posterior evaluación
+minusculas=("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z")
+mayusculas=("A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z")
+
+#funciones internas
+getIndexMin(){
+	value=$1
+	i=0
+	while [ $i -le ${#minusculas} ]; do
+		if [[ "$minusculas[$i]" =~ "$value" ]]; then
+			echo $i
+			break
+		fi
+	i=$((i+1))
+	done
+}
+getIndexMay(){
+	value=$1
+	i=0
+	while [ $i -le ${#mayusculas} ]; do
+		if [[ "$mayusculas[$i]" =~ "$value" ]]; then
+			echo $i
+			break
+		fi
+	i=$((i+1))
+	done
+}
+
+#declaracion del array Letras; éste array será usado por todas las iteraciones del códice
+declare -a letras
+
+entrada=$(nsi $@)
+
+#loop que agrega cada letra del string como un elemento de un array
+letras=($(i=0; while [ $i -lt ${#entrada} ]; do echo ${entrada:$i:1}; i=$((i+1)); done))
+
+# funcion final donde el array ::Letras:: se evalua letra por letra y se suma el valor de todas
+declare -a suma
+for letra in ${letras[*]}; do
+	if [[ " ${minusculas[*]} " =~ " ${letra} " ]]; then
+		let suma+=$(getIndexMin $letra)
+	elif [[ " ${mayusculas[*]} " =~ " ${letra} " ]]; then
+		let suma+=$(getIndexMay $letra)
+	else
+		let suma+=0
+	fi
+done
+echo $suma

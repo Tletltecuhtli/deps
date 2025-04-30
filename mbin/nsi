@@ -1,0 +1,3 @@
+#!/sbin/zsh
+
+echo $@ | tr -d '[:space:]'

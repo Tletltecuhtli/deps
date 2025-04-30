@@ -1,0 +1,14 @@
+#! /bin/sh
+
+w2160=$(ls $HOME/.bkg/2160x3840 | shuf -n 1)
+w1080=$(ls $HOME/.bkg/1080x2560 | shuf -n 1)
+w1024=$(ls $HOME/.bkg/1024x768 | shuf -n 1)
+w1366=$(ls $HOME/.bkg/1366x768 | shuf -n 1)
+
+cp $HOME/.bkg/2160x3840/$w2160 $HOME/.w2160.jpg
+cp $HOME/.bkg/1080x2560/$w1080 $HOME/.w1080.jpg
+cp $HOME/.bkg/1024x768/$w1024 $HOME/.w1024.jpg
+cp $HOME/.bkg/1366x768/$w1366 $HOME/.w1366.jpg
+
+#feh --bg-fill $HOME/.w2160.jpg $HOME/.w1080.jpg $HOME/.w1366.jpg $HOME/.w1024.jpg
+feh --bg-fill $HOME/.w2160.jpg $HOME/.w1080.jpg $HOME/.w1024.jpg

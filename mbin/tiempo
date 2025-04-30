@@ -1,0 +1,69 @@
+#!/bin/zsh
+
+fecha() {
+    y=$(date +%y)
+    m=$(date +%m)
+    d=$(date +%d)
+    M=(A B C D E F G H I J K L)
+
+    echo "2${y}${M[$m]}${$(([##36]d))}"
+}
+
+hora() {
+    (( mid = 0.5 / 43200))
+    h=$(date +%H)
+    n=$(date +%M)
+    s=$(date +%S)
+    sec=$(( ($h * 3600) + ($n * 60) + $s ))
+
+    dec=$((( $sec * $mid )))
+
+    case "$1" in
+        frac)
+            echo $dec | cut -c 2-7
+            ;;
+        *)
+            (( out = $dec * 10))
+            echo $out | cut -c -6
+            ;;
+    esac
+}
+
+cuando() { ## formato de entrada
+    ## cuando 15 ago 2017
+    #> 217HF
+
+    y=$3
+    ms=$2
+    d=$1
+    mes=(ene feb mar abr may jun jul ago sep oct nov dic)
+    M=(A B C D E F G H I J K L)
+    m=$mes[(I)$ms]
+
+    echo "${y:0:1}${y:2:2}${M[$m]}${$(([##36]d))}"
+}
+
+while getopts ":cdfhst" arg; do
+    case $arg in
+        c)
+            cuando $2 $3 $4
+            exit;;
+        d|dia|f|fecha)
+            fecha
+            exit;;
+        h|hora)
+            hora
+            exit;;
+        s|stamp|t|timestamp)
+            o=$(fecha)
+            ut=$(hora frac)
+            echo $o$ut
+            exit;;
+        ?) #Invalid otion
+            echo "Error: Opción invalida"
+            exit 2;;
+    esac
+done
+
+echo "Error: Sin argumento valido"
+exit 2
