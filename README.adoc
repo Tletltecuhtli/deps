@@ -2,4 +2,4 @@
 easy files
 
 == pubkey
-`xbps-fetch https://raw.githubusercontent.com/Tletltecuhtli/deps/main/vanessa.pub`
+`xbps-fetch https://raw.githubusercontent.com/Tletltecuhtli/deps/refs/heads/main/authorized_keys`
